@@ -22,6 +22,7 @@ public class Car : MonoBehaviour {
 	public float InputAcceleration { get; set; } = 0f;
 	public bool InputJump { get; set; } = false;
 	public bool InputShoot { get; set; } = false;
+	public bool InputPunch { get; set; } = false;
 	
 	// Components
 	public Rigidbody Rigidbody { get; private set; }

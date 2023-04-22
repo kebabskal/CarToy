@@ -1293,6 +1293,8 @@ MonoBehaviour:
   JumpScale: {x: 1, y: 1.25, z: 1}
   JumpRotation: {x: -45, y: 0, z: 0}
   LandScale: {x: 1.5, y: 0.6, z: 1.5}
+  DesiredScale: {x: 1, y: 1, z: 1}
+  DesiredRotationEuler: {x: 0, y: 0, z: 0}
 --- !u!65 &3387762688030977982
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1354,6 +1356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForceMultiplier: 0.25
+  Effect: {fileID: 6707708215369912029, guid: 3e4bc45ad8a1b284fa843721ca7056eb, type: 3}
 --- !u!1 &1288891561842059864
 GameObject:
   m_ObjectHideFlags: 0

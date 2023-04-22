@@ -53,6 +53,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Punch"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfe7171c-e327-445c-b9b8-3276d111b5a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7370de54-f6ac-4890-ba10-1a395c4f3273"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97de7d34-678d-4d70-a3be-cb1301eede60"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +207,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Car_Direction = m_Car.FindAction("Direction", throwIfNotFound: true);
         m_Car_Jump = m_Car.FindAction("Jump", throwIfNotFound: true);
         m_Car_Shoot = m_Car.FindAction("Shoot", throwIfNotFound: true);
+        m_Car_Punch = m_Car.FindAction("Punch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,6 +270,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_Direction;
     private readonly InputAction m_Car_Jump;
     private readonly InputAction m_Car_Shoot;
+    private readonly InputAction m_Car_Punch;
     public struct CarActions
     {
         private @Controls m_Wrapper;
@@ -245,6 +278,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Direction => m_Wrapper.m_Car_Direction;
         public InputAction @Jump => m_Wrapper.m_Car_Jump;
         public InputAction @Shoot => m_Wrapper.m_Car_Shoot;
+        public InputAction @Punch => m_Wrapper.m_Car_Punch;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +297,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_CarActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_CarActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_CarActionsCallbackInterface.OnShoot;
+                @Punch.started -= m_Wrapper.m_CarActionsCallbackInterface.OnPunch;
+                @Punch.performed -= m_Wrapper.m_CarActionsCallbackInterface.OnPunch;
+                @Punch.canceled -= m_Wrapper.m_CarActionsCallbackInterface.OnPunch;
             }
             m_Wrapper.m_CarActionsCallbackInterface = instance;
             if (instance != null)
@@ -276,6 +313,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Punch.started += instance.OnPunch;
+                @Punch.performed += instance.OnPunch;
+                @Punch.canceled += instance.OnPunch;
             }
         }
     }
@@ -285,5 +325,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDirection(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnPunch(InputAction.CallbackContext context);
     }
 }

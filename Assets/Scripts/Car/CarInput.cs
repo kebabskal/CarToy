@@ -23,6 +23,7 @@ public class CarInput : CarBehaviour {
 		Car.InputAcceleration = direction.magnitude;
 		Car.InputJump = Controls.Car.Jump.IsPressed();
 		Car.InputShoot = Controls.Car.Shoot.IsPressed();
+		Car.InputPunch = Controls.Car.Punch.IsPressed();
 		
 	}
 }

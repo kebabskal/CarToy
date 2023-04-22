@@ -19,18 +19,18 @@ public class CarAnimator : CarBehaviour {
 	public Vector3 JumpRotation = new Vector3(45f, 0f, 0f);
 	public Vector3 LandScale = new Vector3(1.5f, 0.6f, 1.5f);
 	
-	Vector3 desiredScale = Vector3.one;
-	Vector3 desiredRotationEuler = Vector3.zero;
+	public Vector3 DesiredScale = Vector3.one;
+	public Vector3 DesiredRotationEuler = Vector3.zero;
 	bool wasGrounded = false;
 	
 	void LateUpdate() {
 		// When on ground lerp Scale towards Vector3.one
 		if (Car.IsGrounded)
-			desiredScale = Vector3.one;
+			DesiredScale = Vector3.one;
 		
 		// Lerp scaling and rotation
-		ScaleRoot.localScale = Vector3.Lerp(ScaleRoot.localScale, desiredScale, Time.deltaTime * ScaleSmooth);
-		ScaleRoot.localRotation = Quaternion.Slerp(ScaleRoot.localRotation, Quaternion.Euler(desiredRotationEuler), Time.deltaTime * ScaleSmooth);
+		ScaleRoot.localScale = Vector3.Lerp(ScaleRoot.localScale, DesiredScale, Time.deltaTime * ScaleSmooth);
+		ScaleRoot.localRotation = Quaternion.Slerp(ScaleRoot.localRotation, Quaternion.Euler(DesiredRotationEuler), Time.deltaTime * ScaleSmooth);
 
 		// Update wiggle
 		WiggleRoot.localRotation = Quaternion.Slerp(WiggleRoot.localRotation, Quaternion.identity, Time.deltaTime * WiggleSmooth);
@@ -67,12 +67,12 @@ public class CarAnimator : CarBehaviour {
 
 	void OnLanded() {
 		ScaleRoot.localScale = LandScale;
-		desiredRotationEuler = Vector3.zero;
+		DesiredRotationEuler = Vector3.zero;
 	}	
 	
 	void OnJumped() {
-		desiredScale = JumpScale;
-		ScaleRoot.localScale = Vector3.Lerp(ScaleRoot.localScale, desiredScale, 0.5f);
-		desiredRotationEuler = JumpRotation;
+		DesiredScale = JumpScale;
+		ScaleRoot.localScale = Vector3.Lerp(ScaleRoot.localScale, DesiredScale, 0.5f);
+		DesiredRotationEuler = JumpRotation;
 	}
 }
