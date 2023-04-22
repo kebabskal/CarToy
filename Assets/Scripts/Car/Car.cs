@@ -21,6 +21,7 @@ public class Car : MonoBehaviour {
 	public Vector3 InputDirection { get; set; } = Vector3.forward;
 	public float InputAcceleration { get; set; } = 0f;
 	public bool InputJump { get; set; } = false;
+	public bool InputShoot { get; set; } = false;
 	
 	// Components
 	public Rigidbody Rigidbody { get; private set; }
@@ -32,7 +33,6 @@ public class Car : MonoBehaviour {
 		Rigidbody = GetComponent<Rigidbody>();
 		boxCollider = GetComponent<BoxCollider>();
 	}
-
 
 	Collider[] groundResults = new Collider[32];
 	void CheckGrounded() {

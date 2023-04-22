@@ -28,7 +28,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
             ""id"": ""10456153-ff21-413e-87d1-21fe996599b0"",
             ""actions"": [
                 {
-                    ""name"": ""InputDirection"",
+                    ""name"": ""Direction"",
                     ""type"": ""Value"",
                     ""id"": ""e8d5af68-8768-4436-8570-7c86289fee96"",
                     ""expectedControlType"": ""Vector2"",
@@ -44,6 +44,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""11c24827-e0ad-4d41-9bf5-d2ae06410455"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -54,7 +63,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InputDirection"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -65,7 +74,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InputDirection"",
+                    ""action"": ""Direction"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -76,7 +85,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InputDirection"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -87,7 +96,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InputDirection"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -98,7 +107,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InputDirection"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -109,7 +118,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InputDirection"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -134,6 +143,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""206cd54e-b81c-4e67-9321-4b8a3584e1f5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""645bb771-b29e-49ad-91fb-d3af5198dc29"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -142,8 +173,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
 }");
         // Car
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
-        m_Car_Direction = m_Car.FindAction("InputDirection", throwIfNotFound: true);
+        m_Car_Direction = m_Car.FindAction("Direction", throwIfNotFound: true);
         m_Car_Jump = m_Car.FindAction("Jump", throwIfNotFound: true);
+        m_Car_Shoot = m_Car.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,12 +237,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private ICarActions m_CarActionsCallbackInterface;
     private readonly InputAction m_Car_Direction;
     private readonly InputAction m_Car_Jump;
+    private readonly InputAction m_Car_Shoot;
     public struct CarActions
     {
         private @Controls m_Wrapper;
         public CarActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Direction => m_Wrapper.m_Car_Direction;
         public InputAction @Jump => m_Wrapper.m_Car_Jump;
+        public InputAction @Shoot => m_Wrapper.m_Car_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -226,6 +260,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_CarActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_CarActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_CarActionsCallbackInterface.OnJump;
+                @Shoot.started -= m_Wrapper.m_CarActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_CarActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_CarActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_CarActionsCallbackInterface = instance;
             if (instance != null)
@@ -236,6 +273,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -244,5 +284,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnDirection(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

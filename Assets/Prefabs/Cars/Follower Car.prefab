@@ -938,6 +938,7 @@ GameObject:
   - component: {fileID: 9010439786084653056}
   - component: {fileID: 5008471845259484903}
   - component: {fileID: 1962268258043991835}
+  - component: {fileID: -6046212013374758192}
   m_Layer: 6
   m_Name: Follower Car
   m_TagString: Untagged
@@ -978,7 +979,7 @@ MonoBehaviour:
   AccelerationForce: 100
   GroundMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 72
 --- !u!114 &1288891561680845780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,6 +1088,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.73, y: 1.56, z: 2.42}
   m_Center: {x: 0, y: 0.78, z: -0.74}
+--- !u!114 &-6046212013374758192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288891561680845785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3771bfb922214a9ab0fca3960b653a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForceMultiplier: 0.25
 --- !u!1 &1288891561842059864
 GameObject:
   m_ObjectHideFlags: 0

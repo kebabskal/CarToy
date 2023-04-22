@@ -22,5 +22,7 @@ public class CarInput : CarBehaviour {
 		if (direction.magnitude > 0.1f) Car.InputDirection = direction.normalized;
 		Car.InputAcceleration = direction.magnitude;
 		Car.InputJump = Controls.Car.Jump.IsPressed();
+		Car.InputShoot = Controls.Car.Shoot.IsPressed();
+		
 	}
 }

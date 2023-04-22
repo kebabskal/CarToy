@@ -454,6 +454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Follower Car (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1288891561680845785, guid: 20c0c999817ceea43a6146a4023079ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9010439786084653056, guid: 20c0c999817ceea43a6146a4023079ad,
         type: 3}
       propertyPath: Follow
@@ -536,6 +541,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Follower Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288891561680845785, guid: 20c0c999817ceea43a6146a4023079ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9010439786084653056, guid: 20c0c999817ceea43a6146a4023079ad,
         type: 3}
@@ -701,6 +711,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Follower Car (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1288891561680845785, guid: 20c0c999817ceea43a6146a4023079ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9010439786084653056, guid: 20c0c999817ceea43a6146a4023079ad,
         type: 3}
       propertyPath: Follow
@@ -723,12 +738,12 @@ GameObject:
   - component: {fileID: 1762116718}
   - component: {fileID: 1762116717}
   - component: {fileID: 1762116720}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &1762116717
 MeshRenderer:
@@ -789,11 +804,11 @@ Transform:
   m_GameObject: {fileID: 1762116715}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 64, y: 1, z: 64}
+  m_LocalScale: {x: 32, y: 1, z: 32}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!65 &1762116720
 BoxCollider:
@@ -847,7 +862,7 @@ Transform:
   m_Children:
   - {fileID: 903664852}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2121018561
 MonoBehaviour:
@@ -873,7 +888,7 @@ PrefabInstance:
     - target: {fileID: 1288891561680845784, guid: fc49456fe82ef8f4f95732fdb2a55fa6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1288891561680845784, guid: fc49456fe82ef8f4f95732fdb2a55fa6,
         type: 3}
@@ -883,7 +898,7 @@ PrefabInstance:
     - target: {fileID: 1288891561680845784, guid: fc49456fe82ef8f4f95732fdb2a55fa6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.58
       objectReference: {fileID: 0}
     - target: {fileID: 1288891561680845784, guid: fc49456fe82ef8f4f95732fdb2a55fa6,
         type: 3}

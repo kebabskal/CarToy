@@ -6,6 +6,6 @@ public abstract class CarBehaviour : MonoBehaviour {
 	public Car Car { get; private set; }
 
 	public virtual void OnEnable() {
-		Car = GetComponent<Car>();
+		Car = GetComponentInParent<Car>();
 	}
 }
