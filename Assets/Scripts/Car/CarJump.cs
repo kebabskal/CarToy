@@ -13,10 +13,10 @@ public class CarJump : CarBehaviour {
 		if (Car.IsGrounded && Car.InputJump && jumpWasReleased) {
 			Car.SetVelocity(Car.Velocity.SetY(ForceInitial));
 			jumpWasReleased = false;
-			transform.position += Vector3.up * 0.01f;
+			transform.position += Vector3.up * 0.1f;
 		}
 
 		if (!Car.IsGrounded && Car.InputJump && !jumpWasReleased)
-			Car.AddVelocity(Vector3.up * (ForceContinuous * Time.deltaTime));
+			Car.AddVelocity(Vector3.up * (ForceContinuous));
 	}
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(CarAnimator))]
 public class Car : MonoBehaviour {
@@ -12,27 +13,34 @@ public class Car : MonoBehaviour {
 	
 	// Physics properties
 	public bool IsGrounded { get; private set; }
-	public Vector3 Velocity => velocity;
+	public Vector3 Velocity => Rigidbody.velocity;
 	
 	// Input
 	public Vector3 InputDirection { get; set; } = Vector3.forward;
 	public float InputAcceleration { get; set; } = 0f;
 	public bool InputJump { get; set; } = false;
+	
+	// Components
+	public Rigidbody Rigidbody { get; private set; }
 		
-	Vector3 velocity;
+
+	void OnEnable() {
+		Rigidbody = GetComponent<Rigidbody>();
+	}
 
 	void LateUpdate() {
 		// Update IsGrounded state
-		IsGrounded = transform.position.y <= 0.00001f;
+		IsGrounded = transform.position.y <= 0.1f;
 		
 		// Apply Gravity to velocity
-		if (!IsGrounded)
-			velocity.y += -Gravity * Time.deltaTime;
+		if (!IsGrounded) {
+			AddVelocity(Vector3.down * Gravity);
+		}
 		
 		// Damp velocity along the XZ plane, ignore Vertical for gravity to work
 		if (IsGrounded) {
-			velocity.y = 0;
-			velocity = VectorUtils.Damp(velocity, 60f/DampFactor, Time.deltaTime);
+			SetVelocity(Velocity.SetY(0f));
+			SetVelocity(VectorUtils.Damp(Velocity, 60f/DampFactor, Time.deltaTime));
 		}
 		
 		// Steering
@@ -40,18 +48,17 @@ public class Car : MonoBehaviour {
 		
 		// Accelerate on ground
 		if (IsGrounded)
-			velocity += transform.forward * (InputAcceleration * AccelerationForce * Time.deltaTime);
+			AddVelocity(transform.forward * (InputAcceleration * AccelerationForce));
 
 		// Move car
-		transform.position += velocity * Time.deltaTime;
 		transform.position = new Vector3(transform.position.x, Mathf.Max(0f, transform.position.y), transform.position.z);
 	}
 
 	public void AddVelocity(Vector3 force) {
-		velocity += force;
+		Rigidbody.AddForce(force, ForceMode.Acceleration);
 	}
 
 	public void SetVelocity(Vector3 force) {
-		velocity = force;
+		Rigidbody.velocity = force;
 	}
 }
