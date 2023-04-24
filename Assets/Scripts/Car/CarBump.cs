@@ -17,5 +17,9 @@ public class CarBump : CarBehaviour {
 
 		var delta = Car.transform.position - otherRigidBody.transform.position;
 		Instantiate(Effect, Car.transform.position, quaternion.LookRotation(delta.normalized, Vector3.up));
+
+		Bumped?.Invoke(otherRigidBody.gameObject);
 	}
+
+	public event Action<GameObject> Bumped;
 }

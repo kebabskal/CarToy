@@ -4884,6 +4884,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interval: 0.05
   Force: 80
-  ShotPrefab: {fileID: 4416225873817188375, guid: 4bb3e58714439f7498db94383e2ed4fe,
+  ShotPrefab: {fileID: 8517548310345287511, guid: 31c4510800d9f394997fae054bc56398,
     type: 3}
   MuzzleParticles: {fileID: 7907079010440566874}
