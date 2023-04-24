@@ -9,14 +9,20 @@ public class Shot : MonoBehaviour {
 	Vector3 baseScale;
 	float age = 0f;
 
+	public Rigidbody Rigidbody { get; private set; }
+
+	void Awake()
+	{
+		Rigidbody = GetComponent<Rigidbody>();
+	}
+
 	void Start() {
-		Destroy(gameObject, Lifespan);
 		baseScale = transform.localScale;
 		transform.localScale = Vector3.one;
 	}
 
 	void Update() {
-		age += Time.time;
+		age += Time.deltaTime;
 		Collider.enabled = age > 0.1f;
 		
 		transform.localScale = Vector3.Lerp(
@@ -24,10 +30,28 @@ public class Shot : MonoBehaviour {
 			baseScale,
 			Time.deltaTime * 25f
 		);
+
+		if (age > Lifespan)
+		{
+			gameObject.SetActive(false);
+			Destroy(gameObject);
+		}
+	}
+
+	void LateUpdate()
+	{
+		transform.forward = Rigidbody.velocity.normalized;
 	}
 
 	void OnTriggerEnter(Collider other) {
 		Instantiate(HitEffect, transform.position, transform.rotation);
 		Destroy(gameObject);
 	}
+
+	public void Initialize(GameObject source)
+	{
+		Source = source;
+	}
+
+	public GameObject Source { get; set; }
 }
